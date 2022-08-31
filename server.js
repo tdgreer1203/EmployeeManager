@@ -5,13 +5,14 @@ const db = require('./db/connections');
 const apiRoutes = require('./routes');
 
 const PORT = process.env.PORT || 3001;
+const app = express();
 
-appendFile.use(express.urlencoded({ extended: false }));
-appendFile.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-appendFile.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
-appendFile.use((req, res) => {
+app.use((req, res) => {
     res.status(404).end();
 });
 
