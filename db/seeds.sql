@@ -12,10 +12,13 @@ INSERT INTO roles (title, salary, departments_id) VALUES ('Professor', 120000, 2
 ('Assistant Professor', 75000, 4),
 ('IT Coordinator', 115000, 1);
 
-INSERT INTO employees (first_name, last_name, role_id, employee_id) VALUES 
-('Jason', 'Smith', 0, 3),
-('Charles', 'Cooper', 1, 1),
-('Chris', 'Johnson', 2, 2),
-('Stephanie', 'Jackson', 3, 3),
-('Taylor', 'Myles', 4, 1),
-('Amanda', 'Pate', 2, 1)
+
+INSERT INTO employees (first_name, last_name, role_id) VALUES 
+('Jason', 'Smith', 2),
+('Kathy', 'Reid', 3),
+('Timothy', 'Nowlin', 4),
+('Keith', 'Berry', 1),
+('Carson', 'Johnson', 4),
+('Cynthia', 'Greer', 3),
+('Mark', 'Pate', 3),
+('Randy', 'Dortch', 1);

@@ -24,6 +24,6 @@ CREATE TABLE employees (
     role_id INT,
     employee_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL,
+    FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE SET NULL
 );

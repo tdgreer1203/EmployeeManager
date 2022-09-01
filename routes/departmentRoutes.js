@@ -14,7 +14,7 @@ router.get('/departments', (req, res) => {
 });
 
 router.post('/department', ({ body }, res) => {
-    const sql = `INSERT INTO departments (name) VALUES ?`;
+    const sql = `INSERT INTO departments (name) VALUES (?)`;
     const params = [body.name];
     db.query(sql, params, (err, result) => {
         if(err) {
