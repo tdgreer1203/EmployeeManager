@@ -12,7 +12,6 @@ INSERT INTO roles (title, salary, departments_id) VALUES ('Professor', 120000, 2
 ('Assistant Professor', 75000, 4),
 ('IT Coordinator', 115000, 1);
 
-
 INSERT INTO employees (first_name, last_name, role_id) VALUES 
 ('Jason', 'Smith', 2),
 ('Kathy', 'Reid', 3),
