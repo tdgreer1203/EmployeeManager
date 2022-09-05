@@ -22,7 +22,7 @@ Completing this project helped me understand the differences in design structure
 
 
 ## Walkthrough
-[Video](https://youtu.be/Ver6UJZQWS0)
+[Video](https://youtu.be/ExUFYGcQWuA)
 
 
 
