@@ -8,8 +8,7 @@
 5. [Credits](#credits)
 6. [License](#license)
 7. [Features](#features)
-8. [Tests](#tests)
-9. [Contact](#contact)
+8. [Contact](#contact)
 
   ## Description
 ------
