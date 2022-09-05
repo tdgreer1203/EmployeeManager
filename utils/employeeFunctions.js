@@ -89,7 +89,43 @@ async function addEmployee() {
     return;
 };
 
+async function updateEmployee() {
+    let roles = await getRolesArray();
+    let employees = await getEmployeesArray();
+    let employeeUpdate = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'employee',
+            message: "Select the employee you would like to update: ",
+            choices: employees
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: "Select the employee's new role: ",
+            choices: roles
+        }
+    ]);
+    const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'P@55w0rd!',
+        database: 'employee'
+    });
+    let roleID = roles.indexOf(employeeUpdate.role);
+    let employeeID = employees.indexOf(employeeUpdate.employee);
+    roleID += 1;
+    employeeID += 1;
+    const [rows, fields] = await conn.execute(`UPDATE employees SET role_id = ? WHERE id = ?`, [roleID, employeeID]);
+    await conn.end();
+    console.log("");
+    console.log(`The role has been updated!`);
+    return;
+}
+
 module.exports = {
     getEmployees,
-    addEmployee
+    addEmployee,
+    updateEmployee
 };

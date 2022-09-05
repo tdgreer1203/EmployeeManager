@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const cTable = require('console.table');
 const { getDepartments, addDepartment } = require('./utils/departmentFunctions');
 const { getRoles, addRole } = require('./utils/roleFunctions');
-const { getEmployees, addEmployee } = require('./utils/employeeFunctions');
+const { getEmployees, addEmployee, updateEmployee } = require('./utils/employeeFunctions');
 
 let endProgram = false;
 
@@ -67,7 +67,7 @@ async function startApp() {
         }else if(next.next === 'Add Employee') {
             await addEmployee();
         } else if(next.next === 'Update Employee Role') {
-
+            await updateEmployee();
         } else if(next.next === 'View All Roles') {
             let roles = await getRoles();
             console.log(``);
