@@ -1,44 +1,58 @@
-const db = require('../db/connections');
 const inquirer = require('inquirer');
-const cTable = require('console.table');
 
-getDepartments = () => {
-    const sql = `SELECT * FROM departments`;
-    db.query(sql, (err, rows) => {
-        if (err) {
-            console.log(err);
+const getName = [{
+    type: 'input',
+    name: 'name',
+    message: '? What is the name of the department?',
+    validate: nameInput => {
+        if (nameInput) {
+            return true;
+        } else {
+            console.log('Please enter the name of the department.');
             return false;
         }
-        return rows;
-    });
-};
+    }
+}];
 
-addDepartment = () => {
-    inquirer.prompt([{
-        type: 'input',
-        name: 'name',
-        message: '? What is the name of the department?',
-        validate: nameInput => {
-            if (nameInput) {
-                return true;
-            } else {
-                console.log('Please enter the name of the department.');
-                return false;
-            }
-        }
-    }]).then(nameInput => {
-        const sql = `INSERT INTO departments (name) VALUES (?)`;
-        db.query(sql, nameInput.name, (err, result) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log(`The ${nameInput.name} department has been added!`);
-        });
-    })
+async function getDepartments() {
+    const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({ 
+        host: 'localhost',
+        user: 'root',
+        password: 'P@55w0rd!',
+        database: 'employee'
+    });
+    const [rows, fields] = await conn.execute(`SELECT * FROM departments`);
+    await conn.end();
+    return rows;
+}
+
+async function addDepartment() {
+    let name = await inquirer.prompt(getName);
+    const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'P@55w0rd!',
+        database: 'employee'
+    });
+    const [rows, fields] = await conn.execute(`INSERT INTO departments (name) VALUES (?)`, [name.name]);
+    await conn.end();
+    console.log(`The ${name.name} department has been added!`)
+    return;
+}
+
+async function getDepartmentsArray() {
+    let departments = await getDepartments();
+    var result = [];
+    for(var i = 0; i<departments.length; i++) {
+        result.push(departments[i].name);
+    }
+    return result;
 }
 
 module.exports = {
     getDepartments,
-    addDepartment
+    addDepartment,
+    getDepartmentsArray
 };

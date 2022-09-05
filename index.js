@@ -1,8 +1,8 @@
-const { application } = require('express');
 const inquirer = require('inquirer');
-const db = require('./db/connections');
 const cTable = require('console.table');
 const { getDepartments, addDepartment } = require('./utils/departmentFunctions');
+const { getRoles, addRole } = require('./utils/roleFunctions');
+const { getEmployees, addEmployee } = require('./utils/employeeFunctions');
 
 let endProgram = false;
 
@@ -57,25 +57,26 @@ async function startApp() {
         if(next.next === 'View All Departments') {
             let departments = await getDepartments();
             console.log(``);
-            console.log(departments);
-            console.log(``);
+            await console.table(departments);
         } else if(next.next === 'Add Department') {
-            addDepartment();
+            await addDepartment();
         } else if(next.next === 'View All Employees') {
-
+            let employees = await getEmployees();
+            console.log(``);
+            await console.table(employees);
         }else if(next.next === 'Add Employee') {
-
+            await addEmployee();
         } else if(next.next === 'Update Employee Role') {
 
         } else if(next.next === 'View All Roles') {
-
+            let roles = await getRoles();
+            console.log(``);
+            await console.table(roles);
         } else if(next.next === 'Add Role') {
-
+            await addRole();
         } else {
             isFinished = true;
         }
-        console.log("");
-        console.log('');
         console.log('================================================')
     }
 }
